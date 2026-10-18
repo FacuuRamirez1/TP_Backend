@@ -1,13 +1,15 @@
-### C-06: venta válida con dos renglones
+### C-06: venta válida con dos renglones, precios copiados y total calculado
 POST http://localhost:8000/ventas/
 Content-Type: application/json
 
 {
   "cliente_id": 1,
   "renglones": [
-    {
-      "libro_id": 10,
-      "cantidad": 2
-    }
+    { "libro_id": 1, "cantidad": 2 },
+    { "libro_id": 4, "cantidad": 1 }
   ]
 }
+
+> # Esperado: 201. Precios copiados del libro (libro 1 = "25000.00", libro 4 = "27000.00")
+> # y total calculado por el servidor = "77000.00".
+> # Requiere haber corrido `python -m scripts.seed` (cliente 1 y libros 1-4).

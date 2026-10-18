@@ -9,6 +9,7 @@ from app.modules.editoriales.models import Editorial
 from app.modules.generos.models import Genero
 from app.modules.libros.models import Libro, LibroAutor
 from app.modules.clientes.models import PerfilCliente
+from app.modules.ventas.models import RenglonVenta, Venta  # registran Venta/RenglonVenta para el mapper
 from decimal import Decimal
 
 
@@ -34,10 +35,13 @@ async def seed() -> None:
         ]
         session.add_all(books)
         await session.flush()
-        books[0].autorias.append(LibroAutor(autor_id=autor.id, rol="autor", orden=1))
-        books[3].autorias.extend([
-            LibroAutor(autor_id=autor.id, rol="autor", orden=1),
-            LibroAutor(autor_id=coautor.id, rol="coautor", orden=2),
+        # Se crean las autorías con libro_id explícito: leer books[i].autorias
+        # dispararía la carga perezosa de la colección, que falla dentro del
+        # contexto async (MissingGreenlet).
+        session.add_all([
+            LibroAutor(libro_id=books[0].id, autor_id=autor.id, rol="autor", orden=1),
+            LibroAutor(libro_id=books[3].id, autor_id=autor.id, rol="autor", orden=1),
+            LibroAutor(libro_id=books[3].id, autor_id=coautor.id, rol="coautor", orden=2),
         ])
         session.add(PerfilCliente(cliente_id=cliente.id, telefono="11-5555-0000", direccion="Calle de prueba 123"))
         await session.commit()

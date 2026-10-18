@@ -6,6 +6,7 @@ Revises: ${down_revision | comma,n}
 from typing import Sequence, Union
 from alembic import op
 import sqlalchemy as sa
+import sqlmodel
 
 revision: str = ${repr(up_revision)}
 down_revision: Union[str, None] = ${repr(down_revision)}

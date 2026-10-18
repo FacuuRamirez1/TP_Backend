@@ -15,8 +15,10 @@ async def create(session: AsyncSession, data) -> Cliente:
     except IntegrityError as exc:
         await session.rollback()
         raise ValueError("Ya existe un cliente con ese email") from exc
-    await session.refresh(item)
-    return item
+    # Se devuelve el cliente con su perfil precargado; un refresh() dejaba la
+    # relación perfil sin cargar y la serialización disparaba carga perezosa
+    # dentro del contexto async (MissingGreenlet -> 500).
+    return await get(session, item.id)
 
 
 async def get(session: AsyncSession, item_id: int) -> Cliente | None:

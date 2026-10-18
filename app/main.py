@@ -7,7 +7,7 @@ from app.modules.autores.router import router as autores_router
 from app.modules.clientes.router import router as clientes_router
 from app.modules.editoriales.router import router as editoriales_router
 from app.modules.generos.router import router as generos_router
-from app.modules.health.router import router as health_router
+from app.modules.health.health import router as health_router
 from app.modules.libros.router import router as libros_router
 from app.modules.ventas.router import router as ventas_router
 

@@ -75,11 +75,18 @@ alembic upgrade head
 ```
 
 La carpeta [migrations/](./migrations/) contiene la configuración asincrónica de
-Alembic y dos revisiones:
+Alembic y dos revisiones generadas con `--autogenerate`:
 
-1. `0001_initial`: crea las tablas del catálogo, clientes y ventas, excepto
+1. `6febc85e97a1`: crea las tablas del catálogo, clientes y ventas, excepto
    `genero`.
-2. `0002_add_genero`: crea `genero` y agrega `libro.genero_id`.
+2. `036ddd331c89`: crea `genero` y agrega `libro.genero_id`.
+
+La segunda revisión se corrigió a mano después de leerla: `--autogenerate` emitió
+la foreign key de `libro.genero_id` sin nombre (`create_foreign_key(None, ...)`),
+lo que hacía fallar el `downgrade`. Se le asignó el nombre
+`fk_libro_genero_id_genero` (ver el comentario en el propio archivo). Además se
+agregó `import sqlmodel` al template `script.py.mako`, que faltaba para las
+columnas generadas por SQLModel.
 
 Para comprobar el ciclo de downgrade y upgrade:
 
@@ -130,3 +137,18 @@ La carpeta [test/](./test/) contiene los archivos `.http` solicitados:
 Los archivos son compatibles con la extensión REST Client de VS Code. El caso
 C-07 puede verificarse con las consultas en consola activando `ECHO_SQL=true`
 antes de arrancar Uvicorn.
+
+Antes de correr `C-06` y `C-07` hay que ejecutar `python -m scripts.seed`; `C-07`
+consulta `GET /ventas/1`, que crea el caso `C-06`.
+
+## Evidencia del caso C-07
+
+
+### 1. Detalle de un libro (`GET /libros/1`)
+
+![Detalle de libro con el SQL en consola](./capturas_C-07/C-07-libros.png)
+
+
+### 2. Detalle de una venta (`GET /ventas/1`)
+
+![Detalle de venta con el SQL en consola](./capturas_C-07/C-07-ventas.png)
