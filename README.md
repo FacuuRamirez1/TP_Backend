@@ -1,5 +1,10 @@
 # Trabajo Práctico - Librería
 
+Comisión:4
+Integrantes: Facundo Deseff, Facundo Ramírez, Santino Godoy y Matías Vargas
+
+Link del repositorio: https://github.com/FacuuRamirez1/TP_Backend
+
 API asincrónica de catálogo, clientes y ventas para Programación III (UTN),
 implementada con FastAPI, SQLModel, SQLAlchemy async, PostgreSQL y Alembic.
 
