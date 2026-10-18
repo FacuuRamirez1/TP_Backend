@@ -1,0 +1,7 @@
+### C-07: detalle de libro (observar SQL en consola con ECHO_SQL=true)
+GET http://localhost:8000/libros/10
+
+### C-07: detalle de venta (observar SQL en consola con ECHO_SQL=true)
+GET http://localhost:8000/ventas/1
+
+> # Esperado: cantidad fija de consultas, independiente de autores/renglones.

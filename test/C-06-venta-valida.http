@@ -1,0 +1,13 @@
+### C-06: venta válida con dos renglones
+POST http://localhost:8000/ventas/
+Content-Type: application/json
+
+{
+  "cliente_id": 1,
+  "renglones": [
+    {
+      "libro_id": 10,
+      "cantidad": 2
+    }
+  ]
+}

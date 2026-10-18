@@ -1,0 +1,4 @@
+### C-01: un parámetro de ruta no entero
+GET http://localhost:8000/libros/no-es-entero
+
+> # Esperado: 422; el handler no se ejecuta.

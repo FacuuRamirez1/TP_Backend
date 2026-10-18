@@ -1,0 +1,15 @@
+### C-05: cliente inexistente
+POST http://localhost:8000/ventas/
+Content-Type: application/json
+
+{"cliente_id":999999,"renglones":[{"libro_id":1,"cantidad":1}]}
+
+> # Esperado: 409.
+
+### C-05: libro inexistente
+POST http://localhost:8000/ventas/
+Content-Type: application/json
+
+{"cliente_id":1,"renglones":[{"libro_id":999999,"cantidad":1}]}
+
+> # Esperado: 409.

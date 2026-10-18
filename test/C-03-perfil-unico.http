@@ -1,0 +1,7 @@
+### C-03: segundo perfil del cliente 1
+POST http://localhost:8000/clientes/1/perfil
+Content-Type: application/json
+
+{"telefono":"11-5555-0000","direccion":"Calle falsa 123"}
+
+> # Esperado: 409.

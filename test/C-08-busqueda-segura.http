@@ -1,0 +1,4 @@
+### C-08: el texto se trata como parámetro, no como SQL
+GET http://localhost:8000/libros/?titulo=%27%20OR%20%271%27=%271
+
+> # Esperado: 200 y lista vacía.

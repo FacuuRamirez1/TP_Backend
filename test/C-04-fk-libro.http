@@ -1,0 +1,15 @@
+### C-04: editorial inexistente
+POST http://localhost:8000/libros/
+Content-Type: application/json
+
+{"isbn":"978-950-00-0099-9","titulo":"Sin editorial","precio":"100.00","stock":1,"editorial_id":999999}
+
+> # Esperado: 409 con mensaje propio.
+
+### C-04: autor inexistente
+POST http://localhost:8000/libros/
+Content-Type: application/json
+
+{"isbn":"978-950-00-0098-2","titulo":"Sin autor","precio":"100.00","stock":1,"editorial_id":1,"autores":[{"autor_id":999999,"rol":"autor","orden":1}]}
+
+> # Esperado: 409 con mensaje propio.

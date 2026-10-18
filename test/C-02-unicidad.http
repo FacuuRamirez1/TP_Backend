@@ -1,0 +1,15 @@
+### C-02: ISBN repetido
+POST http://localhost:8000/libros/
+Content-Type: application/json
+
+{"isbn":"978-950-00-0001-1","titulo":"Duplicado","precio":"100.00","stock":1,"editorial_id":1}
+
+> # Esperado: 409 con mensaje propio.
+
+### C-02: email repetido
+POST http://localhost:8000/clientes/
+Content-Type: application/json
+
+{"nombre":"Cliente duplicado","email":"tomas@example.com"}
+
+> # Esperado: 409 con mensaje propio.
